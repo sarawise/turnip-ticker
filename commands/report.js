@@ -4,7 +4,10 @@ module.exports = {
     usage: '<ticker> <price> <am/pm>',
     execute(message) {
         const prefix = "!";
-        if (message.content === prefix + "report") { //why do i have to put a bang here??
+        if (message.content === prefix + "report") { 
+            // TODO: accept content matching usage as written above
+                // then call google spreadsheet fuction (to be written)
+                    // then react on completion
             console.log(prefix);
             message.react("✅");
         };
