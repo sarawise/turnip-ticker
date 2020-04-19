@@ -8,7 +8,7 @@ module.exports = {
             // TODO: accept content matching usage as written above
                 // then call google spreadsheet fuction (to be written)
                     // then react on completion
-            console.log(prefix);
+            console.log("This is not the prefix: " + prefix);
             message.react("✅");
         };
     },
