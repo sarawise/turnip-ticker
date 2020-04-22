@@ -5,7 +5,7 @@ const addSell = require('../lib/addSell.js')
 module.exports = {
     name: 'report',
     description: 'Report your turnip prices, following the usage pattern.',
-    usage: '<ticker> <price> <AM/PM>',
+    usage: '<TICKER> <price> <AM/PM>',
     execute(message) {
     
         // TODO: accept content matching usage as written above
