@@ -2,6 +2,11 @@
 // const jsdom = require('jsdom')
 const {  GoogleSpreadsheet } = require('google-spreadsheet');
 const creds = require('../client_secret.json');
+module.exports = {
+        name: 'best-price',
+        description: 'Return the best price from today and this week.',
+
+	async execute(message) {
 
 function ampm_time(am_pm){
     if (am_pm == 'PM'){
@@ -23,11 +28,6 @@ function log_error(error) {
     console.log(error)
 };
 
-module.exports = {
-	name: 'best-price',
-	description: 'Return the best price from today and this week.',
-	async execute(message) {
-        
         async function getPrices() {
             console.log("Spreadsheet accessed")
             const doc = new GoogleSpreadsheet('1q2AlvVoTMQI5LtvxFeeqM_2x1qwKB60c9Im-wGpSwoY'); // gets sheet using sheet id from url 
@@ -65,7 +65,7 @@ module.exports = {
             parts.push(`Best price today:\t${best_today.ticker} @ ${best_today.price}`)
         }
         if (best_week !== undefined){
-            parts.push(`Best price this week:\t${best_week.ticker} @ ${best_week.price}`)
+            parts.push(`Best price this week:\t${best_week.ticker} @ ${best_week.price} `)
         }
     
         message.channel.send(parts.join('\n'));
