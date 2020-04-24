@@ -25,7 +25,7 @@ module.exports = {
         success = false;
         tickerInfo.forEach(ticker => {
             console.log(ticker.tickerName + ' ' + tickerTokens.ticker)
-            if (ticker.tickerName === tickerTokens.ticker) {
+            if (ticker.tickerName === tickerTokens.ticker && !success) {
                 tickerTokens.userName = ticker.userName;
                 console.log("accessing SpreadSheet")
                 addSell.execute(tickerTokens);
@@ -36,7 +36,7 @@ module.exports = {
         })
         if(!success) {
             tickerInfo.forEach(user => {
-            if (user.userName === message.author.username){
+            if (user.userName === message.author.username && !success){
                 tickerTokens.userName = message.author.username;
                 tickerTokens.ticker = user.tickerName;
                 addSell.execute(tickerTokens);
