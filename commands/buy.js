@@ -3,11 +3,11 @@ const gSheet = require('../lib/gSheet.js')
 module.exports = {
         name: 'buy',
         description: 'Record quantity and price of turnips bought. Use negative quantity to sell.',
-        usage: '!buy <price> <quantity> <date: optional>',
+        usage: '<price> <quantity> <date: optional>',
 
 	async execute(message) {
         const ledgerSheet = await gSheet.getSheet('ledger');
-        [price, quantity, date] = message.content.split(' ')
+        [, price, quantity, date] = message.content.split(' ');
         let today = null
         if (date == null){
             today = new Date()
@@ -15,9 +15,11 @@ module.exports = {
         else{
             today = new Date(date)
         }
+
+        
         row = {
             buyer: message.author.username,
-            date: today.toLocaleString(),
+            date: (today.getMonth() + 1) + '/' + today.getDate() + '/' + today.getFullYear(),
             price: parseInt(price),
             quantity: parseInt(quantity)
         }
