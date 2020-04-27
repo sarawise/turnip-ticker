@@ -39,7 +39,7 @@ module.exports = {
     description: 'Return the best price from today and this week.',
     getBestPrices: getBestPrices,
 	async execute(message) {
-        [best_today, best_week] = getBestPrices()
+        [best_today, best_week] = await getBestPrices()
         if (best_today === undefined && best_week === undefined){
             message.channel.send("No prices to pick from")
         }
