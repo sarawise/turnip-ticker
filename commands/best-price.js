@@ -45,13 +45,12 @@ module.exports = {
         }
         
         parts = []
-        if (best_today !== undefined){
+        if (best_today !== undefined && best_week !== undefined){
             parts.push(`Best price today:\t${best_today.ticker} @ ${best_today.price}`)
-        }
-        if (best_week !== undefined){
             parts.push(`Best price this week:\t${best_week.ticker} @ ${best_week.price} `)
-        }
+            message.channel.send(parts.join('\n'));
+        };
 
-        message.channel.send(parts.join('\n'));
+
     }
 }
