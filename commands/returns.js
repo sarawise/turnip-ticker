@@ -1,6 +1,12 @@
 const gSheet = require('../lib/gSheet.js')
 const bestPrices = require('../commands/best-price.js')
 
+module.exports = {
+        name: 'returns',
+        description: 'Reports potential returns on turnips bought and sold this week.',
+        
+        async execute(message) {
+
 // Thanks Tom: https://blog.abelotech.com/posts/number-currency-formatting-javascript/
 function formatNumber(num) {
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
@@ -14,13 +20,6 @@ function filterLedgerRows(rows, username){
 
     return rows.filter(row => row.buyer == username && new Date(row.date) >= start_of_week)
 }
-
-module.exports = {
-        name: 'returns',
-        description: 'Report the potential returns. Only considers turnips bought and sold this week.',
-        usage: '!returns',
-
-	async execute(message) {
         const ledgerSheet = await gSheet.getSheet('ledger');
 
         let ledger = await ledgerSheet.getRows().then(

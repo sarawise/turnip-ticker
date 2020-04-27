@@ -3,7 +3,7 @@ const gSheet = require('../lib/gSheet.js')
 module.exports = {
         name: 'buy',
         description: 'Record quantity and price of turnips bought. Use negative quantity to sell.',
-        usage: '<price> <quantity> <date: optional>',
+        usage: '<purchase price> <quantity>',
 
 	async execute(message) {
         const ledgerSheet = await gSheet.getSheet('ledger');
