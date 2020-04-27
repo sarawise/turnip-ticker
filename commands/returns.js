@@ -34,12 +34,12 @@ function filterLedgerRows(rows, username){
         parts = [`You bought ${inventory} :turnip: for 🔔${formatNumber(baseValue)}`]
 
         if (!(best_today == null)){
-            bestValueToday = inventory*best_today
-            parts.push(`Best today at 🔔${formatNumber(best_today)} for 🔔${formatNumber(bestValueToday)} at ${((bestValueToday/baseValue)*100-100).toFixed(2)}% RoI`)
+            bestValueToday = inventory*best_today.price
+            parts.push(`Best today at 🔔${formatNumber(best_today.price)} for 🔔${formatNumber(bestValueToday)} at ${((bestValueToday/baseValue)*100-100).toFixed(2)}% RoI`)
         }
         if (!(best_week !== null)){
             bestValueWeek = inventory*best_week
-            parts.push(`Best this week at 🔔${formatNumber(best_week)} for 🔔${formatNumber(bestValueWeek)} at ${((bestValueWeek/baseValue)*100-100).toFixed(2)}% RoI`)
+            parts.push(`Best this week at 🔔${formatNumber(best_week.price)} for 🔔${formatNumber(bestValueWeek)} at ${((bestValueWeek/baseValue)*100-100).toFixed(2)}% RoI`)
         }
         if (!best_today && !best_week){
             parts.push('No prices to compare to :isgraphs:')
