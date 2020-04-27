@@ -31,7 +31,7 @@ function filterLedgerRows(rows, username){
             return total + parseInt(next.quantity) * parseInt(next.price)
         }, 0)
         inventory = ledger.reduce( (total, next) => {return total + parseInt(next.quantity)}, 0)
-        parts = [`You bought ${inventory} :turnip: for 🔔${formatNumber(baseValue)}`]
+        parts = [`You bought ${inventory} <:turnip:699780899738484797> for 🔔${formatNumber(baseValue)}`]
 
         if (!(best_today == null)){
             bestValueToday = inventory*best_today.price
@@ -42,7 +42,7 @@ function filterLedgerRows(rows, username){
             parts.push(`Best this week at 🔔${formatNumber(best_week.price)} for 🔔${formatNumber(bestValueWeek)} at ${((bestValueWeek/baseValue)*100-100).toFixed(2)}% RoI`)
         }
         if (!best_today && !best_week){
-            parts.push('No prices to compare to :isgraphs:')
+            parts.push('No prices to compare to <:isgraphs:691420747465228309>')
         }
 
         message.channel.send(parts.join(`\n`));
