@@ -18,7 +18,7 @@ function filterLedgerRows(rows, username){
 module.exports = {
         name: 'returns',
         description: 'Report the potential returns. Only considers turnips bought and sold this week.',
-        usage: '<price> <quantity> <date: optional>',
+        usage: '!returns',
 
 	async execute(message) {
         const ledgerSheet = await gSheet.getSheet('ledger');
