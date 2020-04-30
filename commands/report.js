@@ -49,6 +49,8 @@ module.exports = {
         }
         if (!success) message.channel.send('Error occurred');
         else {
+            price = parseInt(tickerTokens.price) 
+            if (price <= 75 || price >= 250)
             reax = await reaction.react(parseInt(tickerTokens.price))
             if (reax != null){
                 message.channel.send(reax)
