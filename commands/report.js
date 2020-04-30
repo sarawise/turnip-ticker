@@ -1,12 +1,13 @@
 
 const tickerInfo = require('../lib/ticker-info.json');
 const addSell = require('../lib/addSell.js')
+const reaction = require('./reaction.js')
 
 module.exports = {
     name: 'report',
     description: 'Report your turnip prices, following the usage pattern.',
     usage: '<TICKER> <price> <AM/PM>',
-    execute(message) {
+    async execute(message) {
     
         // TODO: accept content matching usage as written above
             // then call google spreadsheet fuction (to be written)
@@ -47,5 +48,14 @@ module.exports = {
         }) 
         }
         if (!success) message.channel.send('Error occurred');
+        else {
+            price = parseInt(tickerTokens.price) 
+            if (price <= 75 || price >= 250){
+                reax = await reaction.react(parseInt(tickerTokens.price))
+                if (reax != null){
+                    message.channel.send(reax)
+                }
+            }
+        }
     },
 };
