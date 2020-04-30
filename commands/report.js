@@ -7,7 +7,7 @@ module.exports = {
     name: 'report',
     description: 'Report your turnip prices, following the usage pattern.',
     usage: '<TICKER> <price> <AM/PM>',
-    execute(message) {
+    async execute(message) {
     
         // TODO: accept content matching usage as written above
             // then call google spreadsheet fuction (to be written)
@@ -42,15 +42,17 @@ module.exports = {
                 tickerTokens.ticker = user.tickerName;
                 addSell.execute(tickerTokens);
                 message.react("✅");
-                reax = reaction.react(price)
-                if (reax != null){
-                    message.channel.send(reax)
-                }
                 success = true
                 return
             }
         }) 
         }
         if (!success) message.channel.send('Error occurred');
+        else {
+            reax = await reaction.react(parseInt(tickerTokens.price))
+            if (reax != null){
+                message.channel.send(reax)
+            }
+        }
     },
 };
