@@ -1,6 +1,7 @@
 
 const tickerInfo = require('../lib/ticker-info.json');
 const addSell = require('../lib/addSell.js')
+const reaction = require('./reaction.js')
 
 module.exports = {
     name: 'report',
@@ -41,6 +42,10 @@ module.exports = {
                 tickerTokens.ticker = user.tickerName;
                 addSell.execute(tickerTokens);
                 message.react("✅");
+                reax = reaction.react(price)
+                if (reax != null){
+                    message.channel.send(reax)
+                }
                 success = true
                 return
             }
