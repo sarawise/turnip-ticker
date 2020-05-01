@@ -3,7 +3,7 @@ const gSheet = require('../lib/gSheet.js')
 
 module.exports = {
 	name: 'turnip',
-	description: 'Fetch a random turnip gif.',
+	description: 'Fetch a random turnip or AC meme or gif.',
 
 
 	async execute(message) {
