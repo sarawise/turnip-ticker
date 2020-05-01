@@ -1,23 +1,17 @@
-const {  GoogleSpreadsheet } = require('google-spreadsheet');
-const creds = require('../client_secret.json');
+const gSheet = require('../lib/gSheet.js')
+
 
 module.exports = {
 	name: 'turnip',
 	description: 'Fetch a random turnip gif.',
 
-	execute(message) {
-		async function accessSpreadsheet() {
-			const doc = new GoogleSpreadsheet('1q2AlvVoTMQI5LtvxFeeqM_2x1qwKB60c9Im-wGpSwoY'); // gets sheet using sheet id from url 
-			console.log("Spreadsheet accessed")
-			const gifSheet = doc.sheetsByIndex[3];
-			const rows = await gifSheet.getRows(); // can pass in { limit, offset }
-			console.log(rows);
-			await doc.useServiceAccountAuth(creds);
 
-			await doc.getInfo(); // loads document properties and worksheets
+	async execute(message) {
 
-			message.channel.send(`Server name: ${message.guild.name}\nTotal members: ${message.guild.memberCount}`);
-		}
-		accessSpreadsheet();
+			const memeSheet = await gSheet.getSheet('memes');
+			const meme_list = await memeSheet.getRows().then(rows => rows, error => console.log(error))
+			const randomMeme = meme_list[Math.floor(Math.random() * meme_list.length)].url
+
+		message.channel.send(randomMeme)
 	}
 };
