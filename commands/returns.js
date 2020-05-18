@@ -21,12 +21,11 @@ module.exports = {
 
             return rows.filter(row => row.buyer == username && new Date(row.date) >= start_of_week)
         }
-
         emojis = message.client.emojis.cache.reduce((d,e)=>(d[e.name]=e,d),{})
         const ledgerSheet = await gSheet.getSheet('ledger');
 
         let ledger = await ledgerSheet.getRows().then(
-            rows => filterLedgerRows(rows, message.author.username),
+            rows => gSheet.filterLedgerRows(rows, message.author.username),
             error => console.log(error)
         )
         let [best_today, best_week] = await bestPrices.getBestPrices()
