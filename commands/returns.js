@@ -36,17 +36,17 @@ module.exports = {
         parts = [`You bought ${boughtInventory} ${emojis['turnip']} for 🔔${formatNumber(boughtValue)}`, `You currently have ${inventory} ${emojis['turnip']} `]        
 
         if (!(best_today == null)){
-            bestValueToday = inventory*best_today.price
-            parts.push(`Best today at 🔔${formatNumber(best_today.price)} for 🔔${formatNumber(bestValueToday)} at ${(((bestValueToday+soldValue)/boughtValue)*100-100).toFixed(2)}% RoI`)
-            parts.push(`Profit for today: 🔔${formatNumber(bestValueToday-baseValue)}`)
+            bestValueToday = inventory * best_today.price
+            parts.push("") //hacky spacing
+            parts.push(`Today's best price is 🔔${formatNumber(best_today.price)} at ${best_today.ticker} for 🔔${formatNumber(bestValueToday)}, a ${(((bestValueToday+soldValue)/boughtValue)*100-100).toFixed(2)}% return on investment. Your profit would be 🔔${formatNumber(bestValueToday-baseValue)}.`)
         }
         if (!(best_week == null)){
-            bestValueWeek = inventory*best_week.price
-            parts.push(`Best this week at 🔔${formatNumber(best_week.price)} for 🔔${formatNumber(bestValueWeek)} at ${(((bestValueWeek+soldValue)/boughtValue)*100-100).toFixed(2)}% RoI`)
-            parts.push(`Profit for week: 🔔${formatNumber(bestValueWeek-baseValue)}`)
+            bestValueWeek = inventory * best_week.price
+            parts.push("")
+            parts.push(`This week's best is 🔔${formatNumber(best_week.price)} at ${best_today.ticker} for 🔔${formatNumber(bestValueWeek)}. That's a ${(((bestValueWeek+soldValue)/boughtValue)*100-100).toFixed(2)}% return on investment, or a profit of 🔔${formatNumber(bestValueWeek-baseValue)}.`)
         }
         if (!best_today && !best_week){
-            parts.push(`No prices to compare to ${emojis['isgraphs']}`)
+            parts.push(`No prices to compare ${emojis['isgraphs']}`)
         }
 
         message.channel.send(parts.join(`\n`));
