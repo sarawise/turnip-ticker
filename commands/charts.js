@@ -1,4 +1,3 @@
-
 const gSheet = require('../lib/gSheet.js')
 const canvasModule = require('canvas')
 const Discord = require('discord.js');
