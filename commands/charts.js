@@ -8,7 +8,7 @@ module.exports = {
     name: 'charts',
     cooldown: 3,
     description: 'Chart this week\'s prices. Optional list of tickers to filter by, and start date',
-    usage: '[?TICK] <?since>',
+    usage: '[TICK] <since>',
     async execute(message) {     
         let tickList = []
         let since = undefined
@@ -29,7 +29,7 @@ module.exports = {
         const d3n = new D3Node({ canvasModule })      // initializes D3 with container element
         let canvas = d3n.createCanvas(width, height) // create SVG w/ 'g' tag and width/height
         let ctxt = canvas.getContext('2d')
-        ctxt.fillStyle = "white"
+        ctxt.fillStyle = "#23272A"
         ctxt.fillRect(0,0,canvas.width,canvas.height)
         ctxt.font = "bold 20px sans-serif";
 
@@ -64,6 +64,7 @@ module.exports = {
             ctxt.beginPath()
             ctxt.arc(x(d.time), y(d.price), 3, 0, 2 * Math.PI)
             ctxt.fill()
+
         }
         x.domain(d3.extent(prices, p => p.time))
         y.domain(d3.extent(prices, p => +p.price))
@@ -77,17 +78,17 @@ module.exports = {
             ctxt.moveTo(x(t), h)
             ctxt.lineTo(x(t), h + tickSize)
         })
-        ctxt.strokeStyle = "black"
+        ctxt.strokeStyle = "white"
         ctxt.stroke()
 
         ctxt.textAlign = "center"
         ctxt.textBaseline = "top"
-        ctxt.fillStyle = "black"
+        ctxt.fillStyle = "white"
         xTicks.forEach( t => ctxt.fillText(tickFormat(t), x(t), h + tickSize))
 
         // Generate y axis
         let tickPadding = 3,
-            tickCount = 10
+            tickCount = 5
         yTicks = y.ticks(tickCount)
         tickFormat = y.tickFormat(tickCount)
 
@@ -96,7 +97,7 @@ module.exports = {
             ctxt.moveTo(0, y(t))
             ctxt.lineTo(-6, y(t))
         })
-        ctxt.strokeStyle = "black"
+        ctxt.strokeStyle = "white"
         ctxt.stroke()
 
         ctxt.beginPath()
@@ -104,22 +105,22 @@ module.exports = {
         ctxt.lineTo( 0.5, 0)
         ctxt.lineTo(0.5, h)
         ctxt.lineTo(-tickSize, h)
-        ctxt.strokeStyle = "black"
+        ctxt.strokeStyle = "white"
         ctxt.stroke()
 
         ctxt.textAlign = "right"
         ctxt.textBaseline = "middle"
-        ctxt.fillStyle = "black"
+        ctxt.fillStyle = "white"
         yTicks.forEach( t => {
             if (t !== undefined)
                 ctxt.fillText(tickFormat(t), -tickSize - tickPadding, y(t))
         })
         
         ctxt.save();
-        ctxt.rotate(-Math.PI / 2);
+        // ctxt.rotate(-Math.PI / 2);
         ctxt.textAlign = "right";
         ctxt.textBaseline = "top";
-        ctxt.fillText("Price (🔔)", -10, 10);
+        ctxt.fillText("Nook price", 110, 0);
         ctxt.restore();
 
         var tickers = prices.reduce((m, p) => {
@@ -141,7 +142,7 @@ module.exports = {
             // Draw the line
             ctxt.beginPath();
             line(tickers[tick]);
-            ctxt.lineWidth = 1.5;
+            ctxt.lineWidth = 5;
             ctxt.strokeStyle = z(tick);
             ctxt.stroke();
 
